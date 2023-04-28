@@ -27,64 +27,60 @@ const UpdateProduct = () => {
   const [category, setCat] = useState("");
   const [company, setCom] = useState("");
 
-  console.log(name,price,category,company);
+  console.log(name, price, category, company);
 
   let { id } = useParams();
   let navigate = useNavigate();
 
-  useEffect(()=>{
+  useEffect(() => {
     if (!id) {
       navigate("/");
     }
-    
+
     getProductDetails();
-  },[])
-  
-  
-  
-  const getProductDetails = async ()=>{
+  }, []);
+
+  const getProductDetails = async () => {
     dispatch(showLoading());
-        let product = await fetch(`${server_address}/getProduct/${id}`, {
-          headers: {
-            authorization: `bearer ${await JSON.parse(
-              localStorage.getItem("token")
-            )}`,
-          },
-        });
-        dispatch(hideLoading());
-        product = await product.json();
-        setName(product.name);
-        setPrice(product.price);
-        setCat(product.category);
-        setCom(product.company);
-  } 
+    let product = await fetch(`${server_address}/getProduct/${id}`, {
+      headers: {
+        authorization: `bearer ${await JSON.parse(
+          localStorage.getItem("token")
+        )}`,
+      },
+    });
+    dispatch(hideLoading());
+    product = await product.json();
+    setName(product.name);
+    setPrice(product.price);
+    setCat(product.category);
+    setCom(product.company);
+  };
 
-  const updateProduct = async (e)=>{
-        e.preventDefault();
-        let user = await JSON.parse(localStorage.getItem("user"));
-        let userId = user._id;
+  const updateProduct = async (e) => {
+    e.preventDefault();
+    let user = await JSON.parse(localStorage.getItem("user"));
+    let userId = user._id;
 
-        let result = await fetch(`${server_address}/updateProduct/${id}`, {
-          method: "PUT",
-          body: JSON.stringify({ name, price, category, userId, company }),
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `bearer ${await JSON.parse(
-              localStorage.getItem("token")
-            )}`,
-          },
-        });
+    let result = await fetch(`${server_address}/updateProduct/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({ name, price, category, userId, company }),
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `bearer ${await JSON.parse(
+          localStorage.getItem("token")
+        )}`,
+      },
+    });
 
-        result = await result.json();
-        
-        if(result){
-          navigate("/");
-        }
-        
+    result = await result.json();
+
+    if (result) {
+      navigate("/");
     }
+  };
 
   return (
-
     <Container
       sx={{
         display: "flex",
@@ -97,16 +93,16 @@ const UpdateProduct = () => {
         component="form"
         elevation={10}
         sx={{
-          maxWidth: "350px",
+          maxWidth: { xs: "100%", sm: "350px" },
           maxHeight: "500px",
           p: {
-            xs: 1,
+            xs: 3,
             sm: 3,
           },
           pt: { xs: 0, sm: 1 },
           borderRadius: 2,
           m: {
-            xs: 3,
+            xs: 0,
             sm: 0,
           },
         }}
@@ -116,7 +112,7 @@ const UpdateProduct = () => {
             <Typography
               variant="h5"
               sx={{
-                fontSize: 30,
+                fontSize: { xs: 25, sm: 30 },
                 fontWeight: "700",
                 letterSpacing: 1,
                 mb: 3,
@@ -130,7 +126,7 @@ const UpdateProduct = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               label="Enter the Product Name"
-              sx={{ width: { xs: "260px", sm: "290px", md: "330px" } }}
+              sx={{ width: { xs: "100%", sm: "290px", md: "330px" } }}
             />
           </Grid>
           <Grid item xs={12} sx={{ m: 1 }}>
@@ -138,7 +134,7 @@ const UpdateProduct = () => {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               label="Enter the Product Price"
-              sx={{ width: { xs: "260px", sm: "290px", md: "330px" } }}
+              sx={{ width: { xs: "100%", sm: "290px", md: "330px" } }}
             />
           </Grid>
           <Grid item xs={12} sx={{ m: 1 }}>
@@ -146,7 +142,7 @@ const UpdateProduct = () => {
               value={category}
               onChange={(e) => setCat(e.target.value)}
               label="Enter the Product Category"
-              sx={{ width: { xs: "260px", sm: "290px", md: "330px" } }}
+              sx={{ width: { xs: "100%", sm: "290px", md: "330px" } }}
             />
           </Grid>
           <Grid item xs={12} sx={{ m: 1 }}>
@@ -154,12 +150,17 @@ const UpdateProduct = () => {
               value={company}
               onChange={(e) => setCom(e.target.value)}
               label="Enter the Product Company"
-              sx={{ width: { xs: "260px", sm: "290px", md: "330px" } }}
+              sx={{ width: { xs: "100%", sm: "290px", md: "330px" } }}
             />
           </Grid>
           <Grid item xs={12} sx={{ m: 1 }}>
-            <Button onClick={updateProduct} variant="contained" size="large">
-              Update Product
+            <Button
+              sx={{ fontWeight: "bold", letterSpacing: "1px" }}
+              onClick={updateProduct}
+              variant="contained"
+              size="large"
+            >
+              Update
             </Button>
           </Grid>
         </Grid>

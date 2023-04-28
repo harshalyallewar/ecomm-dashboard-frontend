@@ -1,1 +1,1 @@
-export const server_address = "http://localhost:10";
+export const server_address = "https://ecomm-dashboard-backend.onrender.com";

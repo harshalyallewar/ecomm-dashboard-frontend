@@ -125,6 +125,7 @@ const Login = () => {
 
           <Grid item xs={12} sx={{ m: 1 }}>
             <TextField
+            type='password'
               size="small"
               onChange={(e) => setPass(e.target.value)}
               label="Enter Password"

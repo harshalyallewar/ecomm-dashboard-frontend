@@ -25,10 +25,8 @@ const ProductList = () => {
   const navigate = useNavigate();
   const [list, setList] = useState([]);
   let user = JSON.parse(localStorage.getItem("user"));
-  console.log("user", user);
 
   useEffect(() => {
-    console.log("useffect called");
     fetchproducts();
   }, []);
 
@@ -40,8 +38,6 @@ const ProductList = () => {
     });
 
     result = await result.json();
-    // console.log("fetchproducts", result);
-
     if (result.success == false) {
       localStorage.clear();
     } else {
@@ -98,10 +94,10 @@ const ProductList = () => {
   };
 
   return (
-    <Container>
+    <Container sx={{minHeight:'80vh'}}>
       <Paper
         elevation={1}
-        sx={{ maxWidth: "500px", margin: "auto", mt: 4, p: 0 }}
+        sx={{ maxWidth: "500px", margin: "auto", mt: 4,mb:2, p: 0 }}
       >
         <TextField
           onChange={searchProduct}
@@ -117,7 +113,7 @@ const ProductList = () => {
           variant="outlined"
         />
       </Paper>
-      <Paper sx={{ m: 4, mt: 3 }}>
+      <Paper sx={{ m: {xs:0,md:4}, mt: 3 }}>
         <TableContainer sx={{ maxHeight: 542, minHeight: 538 }}>
           <Table sx={{ p: 2 }} stickyHeader>
             <TableHead>

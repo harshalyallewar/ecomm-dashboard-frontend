@@ -34,7 +34,6 @@ const AddProduct = () => {
   const navigate = useNavigate();
 
   const addProduct = async (e) => {
-    console.log(name, price, category, company);
     e.preventDefault();
 
     let user = await JSON.parse(localStorage.getItem("user"));
@@ -52,7 +51,6 @@ const AddProduct = () => {
       return;
     }
 
-    console.log("add prodcut called");
     dispatch(showLoading());
 
     let result = await fetch(`${server_address}/add-product`, {
@@ -93,13 +91,13 @@ const AddProduct = () => {
           maxWidth: "350px",
           maxHeight: "500px",
           p: {
-            xs: 1,
+            xs: 3,
             sm: 3,
           },
           pt: { xs: 0, sm: 1 },
           borderRadius: 2,
           m: {
-            xs: 3,
+            xs: 0,
             sm: 0,
           },
         }}
@@ -109,7 +107,7 @@ const AddProduct = () => {
             <Typography
               variant="h5"
               sx={{
-                fontSize: 30,
+                fontSize: {xs:27,sm:30},
                 fontWeight: "700",
                 letterSpacing: 1,
                 mb: 3,
@@ -122,7 +120,7 @@ const AddProduct = () => {
             <TextField
               onChange={(e) => setName(e.target.value)}
               label="Enter the Product Name"
-              sx={{ width: { xs: "260px", sm: "290px", md: "330px" } }}
+              sx={{ width: { xs: "100%", sm: "290px", md: "330px" } }}
             />
           </Grid>
           <Grid item xs={12} sx={{ m: 1 }}>
@@ -130,25 +128,34 @@ const AddProduct = () => {
               type="number"
               onChange={(e) => setPrice(e.target.value)}
               label="Enter the Product Price"
-              sx={{ width: { xs: "260px", sm: "290px", md: "330px" } }}
+              sx={{ width: { xs: "100%", sm: "290px", md: "330px" } }}
             />
           </Grid>
           <Grid item xs={12} sx={{ m: 1 }}>
             <TextField
               onChange={(e) => setCat(e.target.value)}
               label="Enter the Product Category"
-              sx={{ width: { xs: "260px", sm: "290px", md: "330px" } }}
+              sx={{ width: { xs: "100%", sm: "290px", md: "330px" } }}
             />
           </Grid>
           <Grid item xs={12} sx={{ m: 1 }}>
             <TextField
               onChange={(e) => setCom(e.target.value)}
               label="Enter the Product Company"
-              sx={{ width: { xs: "260px", sm: "290px", md: "330px" } }}
+              sx={{ width: { xs: "100%", sm: "290px", md: "330px" } }}
             />
           </Grid>
-          <Grid item xs={12} sx={{ m: 1 }}>
-            <Button onClick={addProduct} variant="contained" size="large">
+          <Grid
+            item
+            xs={12}
+            sx={{ m: 1, fontWeight: "bold", letterSpacing: "1px" }}
+          >
+            <Button
+              sx={{ fontWeight: "bold", letterSpacing: "1px" }}
+              onClick={addProduct}
+              variant="contained"
+              size="large"
+            >
               Add Product
             </Button>
           </Grid>

@@ -164,19 +164,20 @@ const Signup = () => {
             <TextField
               size="small"
               required
-              label="Enter Password"
-              sx={{ width: { xs: "260px", sm: "290px", md: "330px" } }}
-              onChange={(e) => setPass(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12} sx={{ m: 1 }}>
-            <TextField
-              size="small"
-              required
               type="email"
               label="Enter Email"
               sx={{ width: { xs: "260px", sm: "290px", md: "330px" } }}
               onChange={(e) => setEmail(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} sx={{ m: 1 }}>
+            <TextField
+              type="password"
+              size="small"
+              required
+              label="Enter Password"
+              sx={{ width: { xs: "260px", sm: "290px", md: "330px" } }}
+              onChange={(e) => setPass(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sx={{ m: 1, mt: 3 }}>
